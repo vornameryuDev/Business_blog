@@ -2,8 +2,12 @@
     <div class="nav-container">
         <div class="nav-title" data-uri="{{ url_for('question.list') }}">B5R&J</div>
         <div class="nav-btn">
+            {% if not current_user %}
             <span data-uri="{{ url_for('user.create') }}">SIGN IN</span>
-            <span data-uri="{{ url_for('user.login') }}">LOG IN</span>
+            <span data-uri="{{ url_for('user.login') }}">LOG IN</span>            
+            {% else %}
+            <span data-uri="">MY PAGE</span>
+            {% endif %}
             <span>ABOUT ME</span>
         </div>
     </div>

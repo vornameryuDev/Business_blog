@@ -4,6 +4,10 @@ from wtforms import EmailField, PasswordField, StringField
 from wtforms.validators import DataRequired, Length, EqualTo, Email
 
 
+class UserLoginForm(FlaskForm):
+    nickname = StringField('ID', validators=[DataRequired(), Length(min=3, max=25)])
+    password = PasswordField('비밀번호', validators=[DataRequired()])
+
 class UserCreateForm(FlaskForm):
     username = StringField('이름', validators=[DataRequired(), Length(min=3, max=25)])
     nickname = StringField('로그인ID', validators=[DataRequired(), Length(min=3, max=25)])

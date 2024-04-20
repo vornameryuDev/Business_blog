@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="main-body-container">
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="signin-container">
+            <div>
+                <h2>로그인</h2>
+                {% include '/snippets/error_flash.html' %}
+                <div class="signin-form-element">
+                    <label for="nickname">
+                        {{ form.nickname.label }}
+                    </label>
+                    <input required type="text" class="form-control" name="nickname" value="{{ form.nickname.data or '' }}">
+                </div>
+                <div class="signin-form-element">
+                    <label for="password">
+                        {{ form.password.label }}
+                    </label>
+                    <input required type="password" class="form-control" name="password" value="{{ form.password.data or '' }}">
+                </div>
+                <button class="signin-btn">로그인</button>
+            </div>
+        </div>
+    </form>
+    
+</div>
+
+{% endblock %}

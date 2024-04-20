@@ -1,9 +1,10 @@
 from datetime import datetime
 import email
 from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
-from werkzeug.security import generate_password_hash
+from flask_login import login_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
-from forms.user_forms import UserCreateForm
+from forms.user_forms import UserCreateForm, UserLoginForm
 from models.user_model import User
 from app import db
 
@@ -11,9 +12,23 @@ from app import db
 bp = Blueprint('user', __name__, url_prefix='/user')
 
 
-@bp.route('/login')
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
-    return jsonify(success=True)
+    form = UserLoginForm()
+    #post
+    if request.method == 'POST' and form.validate_on_submit():
+        error = None
+        user = User.query.filter(User.nickname == form.nickname.data).first() #db에서 user 찾기
+        if not user: #user 없음
+            error = "존재하지 않는 ID입니다."
+        elif not check_password_hash(user.password, form.password.data): #비밀번호 안맞음
+            error = "비밀번호가 틀렸습니다."
+        if error is None: #둘다 맞으면
+            login_user(user) #session 저장
+            return redirect(url_for('question.list')) #홈으로 이동
+        flash(error) #에러송출
+    #get
+    return render_template('user/login.html', form=form)
 
 
 @bp.route('/create', methods=["GET", "POST"])
