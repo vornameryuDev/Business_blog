@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="question-list-container">
+    <div class="row">
+        <!-- question navigation -->        
+        {% include '/snippets/question_list_nav.html' %}
+        <!-- question 등록 -->
+        <div class="col-10 question-list-table">
+            <div class="question-detail-subject">
+                <h2>{{ question.subject }}</h2>
+                <div class="badge text-dark bg-light">
+                    <span>{{ question.user.username }}</span>&nbsp;&nbsp;
+                    <span>{{ question.created_at }}</span>
+                </div>
+            </div>
+            <div style="margin-top: 20px;">
+                {{ question.content }}
+            </div>
+            <div class="question-detail-btn-box">
+                <span class="btn btn-dark">목록</span>
+                <span class="btn btn-secondary">수정</span>
+                <span class="btn btn-dark">삭제</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

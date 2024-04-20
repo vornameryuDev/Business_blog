@@ -8,6 +8,7 @@
 }
 a {
     text-decoration: none;
+    color: black;
 }
 
 header {    
@@ -107,4 +108,18 @@ header {
 .question-create-btn{
     display: flex;
     justify-content: end;
+}
+.question-detail-subject {
+    border-bottom: solid 1px var(--app-color);
+}
+.question-detail-subject h2 {
+    margin-bottom: 10px;
+}
+.question-detail-btn-box {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+}
+.question-detail-btn-box span{
+    margin-left: 10px;
 }

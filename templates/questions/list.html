@@ -4,36 +4,41 @@
 <div class="question-list-container">
     <div class="row">
         <!-- question navigation -->
-        <div class="col-2 question-list-nav">
-            <a href="">공지사항</a>
-            <a href="">질의응답</a>
-        </div>
+        {% include '/snippets/question_list_nav.html' %}
         <!-- question 표 -->
         <div class="col-10 question-list-table">
             <h2>공지사항</h2>
             <table class="table">
                 <thead>
                     <tr class="table-dark row">
-                        <td class="col-1">번호</td>
-                        <td class="col-5">제목</td>
-                        <td class="col-2">작성자</td>
-                        <td class="col-2">조회</td>
-                        <td class="col-2">날짜</td>
+                        <td class="col-1" style="text-align: center;">번호</td>
+                        <td class="col-5" style="text-align: center;">제목</td>
+                        <td class="col-2" style="text-align: center;">작성자</td>
+                        <td class="col-2" style="text-align: center;">조회</td>
+                        <td class="col-2" style="text-align: center;">날짜</td>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for question in question_list %}
                     <tr class="row">
-                        <td class="col-1">1</td>
-                        <td class="col-5">제목입니다.</td>
-                        <td class="col-2">작성자 입니다.</td>
-                        <td class="col-2">조회 입니다.</td>
-                        <td class="col-2">날짜 입니다.</td>
+                        <td class="col-1" style="text-align: center;">{{ loop.index }}</td>
+                        <td class="col-5">
+                            <a href="{{ url_for('question.detail', question_id=question.id) }}">
+                                {{ question.subject }}
+                            </a>
+                        </td>
+                        <td class="col-2" style="text-align: center;">{{ question.user.username }}</td>
+                        <td class="col-2" style="text-align: center;">anony</td>
+                        <td class="col-2" style="text-align: center;">{{ question.created_at|datetime }}</td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
+            {% if current_user.username == "유민수" %}
             <div class="question-create-btn">
                 <a class="btn btn-dark" href="{{ url_for('question.create') }}">등록</a>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>

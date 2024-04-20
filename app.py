@@ -36,10 +36,13 @@ def create_app():
     login_manager = LoginManager()
     login_manager.init_app(app) #app등록
     login_manager.session_protection = 'strong'
-
     @login_manager.user_loader #세션저장
     def load_user(user_id):
         return User.get(user_id)
+    
+    #---------- filters
+    import filters
+    app.jinja_env.filters['datetime'] = filters.datetime_format
 
         
     return app
