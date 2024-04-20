@@ -4,8 +4,9 @@ from flask import Flask, render_template
 def create_app():
     app = Flask(__name__)
 
-    @app.route('/')
-    def test():
-        return render_template('test.html')
+    #---------- blueprint
+    from views import home_view
+    app.register_blueprint(home_view.bp)
+    
     
     return app
