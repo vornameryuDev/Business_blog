@@ -2,6 +2,12 @@
     font-family: "Anton", sans-serif;    
     font-style: normal;
   }
+
+:root{
+    --app-color: rgb(230, 222, 222);
+}
+
+
 header {    
     padding: 20px;
 }
@@ -17,6 +23,9 @@ header {
 .nav-title {
     font-size: 50px;
 }
+.nav-title:hover {
+    cursor: pointer;
+}
 .nav-btn {
     font-size: 30px;    
 }
@@ -26,8 +35,11 @@ header {
 .nav-btn span:hover {
     cursor: pointer;
 }
-.question-list-container {
-    /* background-color: rgb(209, 208, 212);  */
+.main-body-container {    
+    background-color: rgb(230, 222, 222);
+    padding: 20px 0 20px 0;
+}
+.question-list-container {    
     background-color: rgb(230, 222, 222);
     padding: 20px 0 20px 0;
 }
@@ -54,4 +66,36 @@ header {
     background-color: black;
     color: white;
     font-weight: 700;    
+}
+.question-list-table {
+    padding: 20px;
+    background-color: white;
+}
+.signin-container h2 {
+    font-weight: 700;
+    padding: 10px 0 10px 0;
+    border-bottom: solid 1px var(--app-color);
+    margin-bottom: 30px;
+}
+.signin-container>div {
+    background-color: white;
+    width: 500px;
+    margin: 0 auto;
+    padding:20px;
+    border-radius: 10px;
+}
+.signin-container button {
+    width:100%;
+    height: 40px;
+    background-color: black;
+    color: white;
+    font-weight: 700;
+    margin-top: 10px;    
+    border-radius: 7px;
+}
+.signin-form-element {
+    margin-bottom: 10px;    
+}
+.signin-form-element label{
+    font-weight: 700;
 }

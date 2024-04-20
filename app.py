@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, config
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -9,6 +9,9 @@ db = SQLAlchemy()
 migrate = Migrate()
 def create_app():
     app = Flask(__name__)
+    
+    #--------- CSRF
+    app.secret_key = config.secret_key
 
     #---------- config    
     app.config.from_object(config)

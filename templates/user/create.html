@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="main-body-container">
+    <!-- question 표 -->
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="signin-container">
+            <div>
+                <h2>회원가입</h2>
+                {% include '/snippets/error_flash.html' %}
+                <div class="signin-form-element">
+                    <label for="username">
+                        {{ form.username.label }}
+                    </label>
+                    <input required type="text" class="form-control" name="username" value="{{ form.username.data or '' }}">
+                </div>
+                <div class="signin-form-element">
+                    <label for="nickname">
+                        {{ form.nickname.label }}
+                    </label>
+                    <input required type="text" class="form-control" name="nickname" value="{{ form.nickname.data or '' }}">
+                </div>
+                <div class="signin-form-element">
+                    <label for="password1">
+                        {{ form.password1.label }}
+                    </label>
+                    <input required type="password" class="form-control" name="password1" value="{{ form.password1.data or '' }}">
+                </div>
+                <div class="signin-form-element">
+                    <label for="password2">
+                        {{ form.password2.label }}
+                    </label>
+                    <input required type="password" class="form-control" name="password2" value="{{ form.password2.data or '' }}">
+                </div>                
+                <div class="signin-form-element">
+                    <label for="phone">
+                        {{ form.phone.label }}
+                    </label>
+                    <input required type="text" class="form-control" name="phone" value="{{ form.phone.data or '' }}" placeholder="숫자만 입력하세요">
+                </div>                
+                <div class="signin-form-element">
+                    <label for="email">
+                        {{ form.email.label }}
+                    </label>
+                    <input required type="email" class="form-control" name="email" value="{{ form.email.data or '' }}">
+                </div>                
+                <div class="signin-form-element">
+                    <label for="address">
+                        {{ form.address.label }}
+                    </label>
+                    <input required type="text" class="form-control" name="address" value="{{ form.address.data or '' }}" placeholder="시, 도, 구, 군까지만 입력하세요">
+                </div>
+                <button class="signin-btn">회원가입</button>
+            </div>
+        </div>
+    </form>
+    
+</div>
+
+{% endblock %}
