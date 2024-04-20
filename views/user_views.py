@@ -13,7 +13,6 @@ bp = Blueprint('user', __name__, url_prefix='/user')
 
 @bp.route('/logout')
 def logout():
-    print(current_user.username)
     logout_user() #세션삭제    
     return redirect(url_for('question.list'))
 

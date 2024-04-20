@@ -25,6 +25,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     from models.user_model import User
+    from models.question_model import Question
 
     #---------- blueprint
     from views import question_views, user_views
