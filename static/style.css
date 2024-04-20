@@ -23,6 +23,9 @@ header {
 .nav-btn span {
     margin-left: 30px;
 }
+.nav-btn span:hover {
+    cursor: pointer;
+}
 .question-list-container {
     /* background-color: rgb(209, 208, 212);  */
     background-color: rgb(230, 222, 222);
@@ -45,9 +48,10 @@ header {
     text-align: center;
     text-decoration: none;
     color: black;
+    font-weight: 700;
 }
 .question-list-container .question-list-nav a:hover {
     background-color: black;
     color: white;
-    font-weight: 700;
+    font-weight: 700;    
 }
