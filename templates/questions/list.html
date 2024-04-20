@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="question-list-container">
+    <div class="row">
+        <!-- question navigation -->
+        <div class="col-2 question-list-nav">
+            <a href="">공지사항</a>
+            <a href="">질의응답</a>
+        </div>
+        <!-- question 표 -->
+        <div class="col-10" style="padding: 20px; background-color: white;">
+            <h2>공지사항</h2>
+            <table class="table">
+                <thead>
+                    <tr class="table-dark row">
+                        <td class="col-1">번호</td>
+                        <td class="col-5">제목</td>
+                        <td class="col-2">작성자</td>
+                        <td class="col-2">조회</td>
+                        <td class="col-2">날짜</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row">
+                        <td class="col-1">1</td>
+                        <td class="col-5">제목입니다.</td>
+                        <td class="col-2">작성자 입니다.</td>
+                        <td class="col-2">조회 입니다.</td>
+                        <td class="col-2">날짜 입니다.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
