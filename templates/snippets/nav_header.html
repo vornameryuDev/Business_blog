@@ -1,12 +1,29 @@
 <header class="anton-regular">
     <div class="nav-container">
         <div class="nav-title" data-uri="{{ url_for('question.list') }}">B5R&J</div>
-        <div class="nav-btn">
-            {% if not current_user %}
-            <span data-uri="{{ url_for('user.create') }}">SIGN IN</span>
-            <span data-uri="{{ url_for('user.login') }}">LOG IN</span>            
-            {% else %}
-            <span data-uri="">MY PAGE</span>
+        <div class="nav-btn">   
+            {% if current_user.is_authenticated %}
+            <span class="logout">
+                <a href="">
+                    MYPAGE<font style="font-size:20px; font-weight:700;">({{ current_user.username }})</font>                   
+                </a>
+            </span>
+            <span class="logout">
+                <a href="{{ url_for('user.logout') }}">
+                    (LOG OUT)
+                </a>
+            </span>
+            {% else %}         
+            <span>
+                <a href="{{ url_for('user.create') }}">
+                    SIGN IN
+                </a>     
+            </span>
+            <span>
+                <a href="{{ url_for('user.login') }}">
+                    LOG IN
+                </a>
+            </span>
             {% endif %}
             <span>ABOUT ME</span>
         </div>
