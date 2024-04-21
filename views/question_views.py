@@ -12,6 +12,16 @@ from models.user_model import User
 bp = Blueprint('question', __name__, url_prefix='/question')
 
 
+@bp.route('/delete/<int:question_id>')
+@login_required
+def delete(question_id):
+    question = Question.query.get_or_404(question_id) #객체검색
+    if current_user.username != "유민수":
+        flash('삭제권한이 없습니다.')
+    db.session.delete(question)
+    db.session.commit() #db에서 삭제
+    return redirect(url_for('question.list'))
+
 @bp.route('/update/<int:question_id>', methods=["GET", "POST"])
 @login_required
 def update(question_id):
@@ -23,7 +33,7 @@ def update(question_id):
         return redirect(url_for('question.detail', question_id=question_id))
     #get
     if current_user.username != "유민수":
-        return jsonify(grant=False)
+        flash('수정권한이 없습니다')
     return render_template('questions/update.html', form=form)
 
 

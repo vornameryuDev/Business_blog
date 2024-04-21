@@ -7,10 +7,12 @@ function backToQuestionList() {
     location.href = this.dataset.uri;
 }
 function updateQuestion() {
-    location.href = this.dataset.uri;
+        location.href = this.dataset.uri;    
 }
 function deleteQuestion() {
-    location.href = this.dataset.uri;
+    if (confirm('정말 삭제하시겠습니까?')) {
+        location.href = this.dataset.uri;
+    }
 }
 
 

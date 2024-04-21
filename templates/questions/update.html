@@ -20,7 +20,7 @@
                     <textarea class="form-control" type="text" name="content" row="20">{{ form.content.data or '' }}</textarea>
                 </div>
                 <div class="question-create-btn mt-2">
-                    <button class="btn btn-dark">저장</button>
+                    <button class="save btn btn-dark">저장</button>
                 </div>            
             </form>
         </div>
@@ -28,4 +28,14 @@
 </div>
 
 
+{% endblock %}
+{% block script %}
+<script>
+    const questionUpdateSaveBtn = document.querySelector('div.question-create-btn button.save');
+    questionUpdateSaveBtn.addEventListener('click', function() {
+        if (confirm('정말 수정하시겠습니까?')) {
+            location.href = this.dataset.uri;
+        }
+    })
+</script>
 {% endblock %}

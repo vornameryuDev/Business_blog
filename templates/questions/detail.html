@@ -22,7 +22,7 @@
                 <span class="update btn btn-secondary" data-uri="{{ url_for('question.update', question_id=question.id) }}">
                     수정
                 </span>
-                <span class="delete btn btn-dark">삭제</span>
+                <span class="delete btn btn-dark" data-uri="{{ url_for('question.delete', question_id=question.id) }}">삭제</span>
             </div>
         </div>
     </div>
