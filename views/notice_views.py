@@ -21,6 +21,7 @@ def delete(notice_id):
     db.session.commit() #db에서 삭제
     return redirect(url_for('notice.list'))
 
+
 @bp.route('/update/<int:notice_id>', methods=["GET", "POST"])
 @login_required
 def update(notice_id):
@@ -41,6 +42,7 @@ def detail(notice_id):
     notice = Notice.query.get_or_404(notice_id)
     return render_template('notice/detail.html', notice=notice)
 
+
 @bp.route('/create', methods=["GET", "POST"])
 @login_required
 def create():
@@ -59,6 +61,7 @@ def create():
     if current_user.username != "유민수":
         return jsonify(grant=False)
     return render_template('notice/create.html', form=form)
+
 
 @bp.route('/list')
 def list():
