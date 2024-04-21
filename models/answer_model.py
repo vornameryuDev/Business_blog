@@ -9,4 +9,4 @@ class Answer(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
     question_id = db.Column(db.Integer, db.ForeignKey('question.id', ondelete='CASCADE'))
     user = db.relationship('User', backref=db.backref('answer_set'))
-    question = db.relationship('Question', backref=db.backref('answer_set'))
+    question = db.relationship('Question', backref=db.backref('answer_set', order_by='Answer.created_at.desc()'))

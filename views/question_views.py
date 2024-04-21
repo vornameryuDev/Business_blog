@@ -2,6 +2,7 @@ from datetime import datetime
 from flask import Blueprint, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 
+from forms.answer_form import AnswerCreateForm
 from forms.question_form import QuestionCreateForm, QuestionUpdateForm
 from models.question_model import Question
 from app import db
@@ -41,8 +42,10 @@ def update(question_id):
 @bp.route('/detail/<int:question_id>')
 @login_required
 def detail(question_id):
+    form = AnswerCreateForm()
     question = Question.query.get_or_404(question_id)
-    return render_template('question/detail.html', question=question)
+    answer_list = question.answer_set
+    return render_template('question/detail.html', question=question, form=form, answer_list=answer_list)
 
 
 @bp.route('/create', methods=["GET", "POST"])

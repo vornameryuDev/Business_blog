@@ -26,6 +26,19 @@
                 <span class="delete btn btn-dark" data-uri="{{ url_for('question.delete', question_id=question.id) }}">삭제</span>
                 {% endif %}
             </div>
+
+            <!-- answer -->
+            <h3 class="answer-numbers-title">
+                {{ answer_list|length }}개의 답변이 있습니다
+            </h3>
+
+            <!-- answer create -->
+            {% include '/answer/create.html' %}
+
+            <!-- answer list -->
+            {% include '/answer/list.html' %}
+
+
         </div>
     </div>
 </div>

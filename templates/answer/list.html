@@ -1,0 +1,23 @@
+{% for answer in answer_list %}
+<div style="margin-top:30px;">
+    <div class="card">
+        <div class="card-body">
+            <div>{{ answer.content }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge text-dark bg-light text-start">
+                    <div>
+                        {{ answer.user.username }}
+                    </div>
+                    <div>{{ answer.created_at }}</div>
+                </div>
+            </div>
+            <div class="answer-list-box">
+                <a href=""><i class="fa-solid fa-comment"></i> 댓글 | </a>
+                <a href=""><i class="fa-solid fa-thumbs-up"></i> 추천 | </a>
+                <a href=""><i class="fa-solid fa-pen"></i> 수정 | </a>
+                <a href=""><i class="fa-solid fa-trash"></i> 삭제 </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
