@@ -29,14 +29,17 @@ def create_app():
     #---------- db, mirate init
     db.init_app(app)
     migrate.init_app(app, db)
-    from models.user_model import User
+    from models.answer_model import Answer
+    from models.question_model import Question
     from models.notice_model import Notice
+    from models.user_model import User
 
     #---------- blueprint
-    from views import user_views, notice_views
+    from views import user_views, notice_views, question_views, answer_views
+    app.register_blueprint(answer_views.bp)
+    app.register_blueprint(question_views.bp)
     app.register_blueprint(notice_views.bp)
     app.register_blueprint(user_views.bp)
-
 
     #---------- login support
     login_manager = LoginManager()
@@ -51,8 +54,7 @@ def create_app():
     def unauthorized_callback():
         print(request.path)
         print(urlencode(request.args))
-        return redirect(url_for('user.login'))
-    
+        return redirect(url_for('user.login'))    
 
     #---------- filters
     import filters
