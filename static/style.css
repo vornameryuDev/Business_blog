@@ -71,7 +71,7 @@ header {
     font-weight: 700;    
 }
 .question-list-table {
-    padding: 20px;
+    padding: 20px 40px 20px 40px;
     background-color: white;
 }
 .question-list-table h2 {
@@ -108,6 +108,7 @@ header {
 .question-create-btn{
     display: flex;
     justify-content: end;
+    margin-right: 0;
 }
 .question-detail-subject {
     border-bottom: solid 1px var(--app-color);

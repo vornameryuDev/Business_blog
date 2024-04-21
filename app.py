@@ -5,9 +5,13 @@ from flask_cors import CORS
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+import sqlalchemy
 
 import config
 
+
+
+#db 전역변수로 설정
 db = SQLAlchemy()
 migrate = Migrate()
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #https만 지원하는 기능 사용하기 위해
@@ -26,11 +30,11 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     from models.user_model import User
-    from models.question_model import Question
+    from models.notice_model import Notice
 
     #---------- blueprint
-    from views import question_views, user_views
-    app.register_blueprint(question_views.bp)
+    from views import user_views, notice_views
+    app.register_blueprint(notice_views.bp)
     app.register_blueprint(user_views.bp)
 
 
@@ -43,7 +47,7 @@ def create_app():
     def load_user(user_id):
         return User.get(user_id)
     
-    @login_manager.unauthorized_handler #로그인 필요한 곳에 그냥 접근시
+    @login_manager.unauthorized_handler #로그인 안하고 접근시
     def unauthorized_callback():
         print(request.path)
         print(urlencode(request.args))

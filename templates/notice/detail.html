@@ -8,22 +8,24 @@
         <!-- question 등록 -->
         <div class="col-10 question-list-table">
             <div class="question-detail-subject">
-                <h2>{{ question.subject }}</h2>
+                <h2>{{ notice.subject }}</h2>
                 <div class="badge text-dark bg-light">
-                    <span>{{ question.user.username }}</span>&nbsp;&nbsp;
-                    <span>{{ question.created_at }}</span>
+                    <span>{{ notice.user.username }}</span>&nbsp;&nbsp;
+                    <span>{{ notice.created_at }}</span>
                 </div>
             </div>
             <div style="margin-top: 20px;">
-                {{ question.content }}
+                {{ notice.content }}
             </div>
+            {% if current_user.username == "유민수" %}
             <div class="question-detail-btn-box">
-                <span class="list btn btn-dark" data-uri="{{ url_for('question.list') }}">목록</span>
-                <span class="update btn btn-secondary" data-uri="{{ url_for('question.update', question_id=question.id) }}">
+                <span class="list btn btn-dark" data-uri="{{ url_for('notice.list') }}">목록</span>
+                <span class="update btn btn-secondary" data-uri="{{ url_for('notice.update', notice_id=notice.id) }}">
                     수정
                 </span>
-                <span class="delete btn btn-dark" data-uri="{{ url_for('question.delete', question_id=question.id) }}">삭제</span>
+                <span class="delete btn btn-dark" data-uri="{{ url_for('notice.delete', notice_id=notice.id) }}">삭제</span>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
