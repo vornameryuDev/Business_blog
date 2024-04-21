@@ -18,9 +18,11 @@
                 {{ question.content }}
             </div>
             <div class="question-detail-btn-box">
-                <span class="btn btn-dark">목록</span>
-                <span class="btn btn-secondary">수정</span>
-                <span class="btn btn-dark">삭제</span>
+                <span class="list btn btn-dark" data-uri="{{ url_for('question.list') }}">목록</span>
+                <span class="update btn btn-secondary" data-uri="{{ url_for('question.update', question_id=question.id) }}">
+                    수정
+                </span>
+                <span class="delete btn btn-dark">삭제</span>
             </div>
         </div>
     </div>

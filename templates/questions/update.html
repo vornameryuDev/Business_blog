@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="question-list-container">
+    <div class="row">
+        <!-- question navigation -->        
+        {% include '/snippets/question_list_nav.html' %}
+        <!-- question 수정 -->
+        <div class="col-10 question-list-table">
+            <h2>공지사항 수정</h2>
+            <form method="post">
+                {{form.csrf_token}}
+                {% include 'snippets/error_flash.html' %}
+                <div>
+                    <label for="question_subject">{{ form.subject.label }}</label>
+                    <input class="form-control" type="text" name="subject" value="{{ form.subject.data or '' }}">
+                </div>
+                <div>
+                    <label for="question_content">{{ form.content.label }}</label>
+                    <textarea class="form-control" type="text" name="content" row="20">{{ form.content.data or '' }}</textarea>
+                </div>
+                <div class="question-create-btn mt-2">
+                    <button class="btn btn-dark">저장</button>
+                </div>            
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

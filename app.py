@@ -1,5 +1,6 @@
 import os
-from flask import Flask, config
+from urllib.parse import urlencode
+from flask import Flask, config, redirect, request, url_for
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -32,14 +33,23 @@ def create_app():
     app.register_blueprint(question_views.bp)
     app.register_blueprint(user_views.bp)
 
+
     #---------- login support
     login_manager = LoginManager()
     login_manager.init_app(app) #app등록
     login_manager.session_protection = 'strong'
+
     @login_manager.user_loader #세션저장
     def load_user(user_id):
         return User.get(user_id)
     
+    @login_manager.unauthorized_handler #로그인 필요한 곳에 그냥 접근시
+    def unauthorized_callback():
+        print(request.path)
+        print(urlencode(request.args))
+        return redirect(url_for('user.login'))
+    
+
     #---------- filters
     import filters
     app.jinja_env.filters['datetime'] = filters.datetime_format
