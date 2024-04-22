@@ -16,10 +16,20 @@
                 <a href=""> | <i class="fa-solid fa-thumbs-up"></i>추천</a>
                 {% if current_user.nickname == answer.user.nickname %}
                 <a href="{{ url_for('answer.update', answer_id=answer.id) }}">| <i class="fa-solid fa-pen"></i> 수정</a>
-                <a href="{{ url_for('answer.delete', answer_id=answer.id) }}">| <i class="fa-solid fa-trash"></i> 삭제 </a>
+                <a class="delete" href="#" data-uri="{{ url_for('answer.delete', answer_id=answer.id) }}">| <i class="fa-solid fa-trash"></i> 삭제 </a>
                 {% endif %}
             </div>
         </div>
     </div>
 </div>
 {% endfor %}
+{% block script %}
+<script>
+    const answerDeleteBtn = document.querySelector('div.answer-list-box a.delete');
+    answerDeleteBtn.addEventListener('click', function() {
+        if (confirm('정말 삭제하시겠습니까?')) {
+            location.href = this.dataset.uri;
+        }
+    })
+</script>
+{% endblock %}

@@ -12,8 +12,14 @@ bp = Blueprint('answer', __name__, url_prefix='/answer')
 
 
 @bp.route('/delete/<int:answer_id>')
-def delete(answer_id):
-    return jsonify(success=True)
+def delete(answer_id):    
+    answer = Answer.query.get_or_404(answer_id)
+    question_id = answer.question.id
+    if current_user.nickname != answer.user.nickname:
+        return jsonify(grant=False)
+    db.session.delete(answer)
+    db.session.commit()
+    return redirect(url_for('question.detail', question_id=question_id))
 
 
 @bp.route('/update/<int:answer_id>', methods=["GET", "POST"])
