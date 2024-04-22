@@ -19,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for notice in notice_list %}
+                    {% for notice in notice_list.items %}
                     <tr class="row">
                         <td class="col-1" style="text-align: center;">{{ loop.index }}</td>
                         <td class="col-5">
@@ -34,6 +34,11 @@
                     {% endfor %}
                 </tbody>
             </table>
+
+            <!-- paging -->
+            {% include '/snippets/pagination.html' %}
+
+            <!-- 등록 -->
             {% if current_user.username == "유민수" %}
             <div class="question-create-btn">
                 <a class="btn btn-dark" href="{{ url_for('notice.create') }}">등록</a>

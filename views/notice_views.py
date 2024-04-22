@@ -64,6 +64,8 @@ def create():
 
 
 @bp.route('/list')
-def list():
-    notice_list = Notice.query.all()
+def list():    
+    page = request.args.get('page', type=int, default=1) #페이지 가져오기
+    notice_list = Notice.query.order_by(Notice.created_at.desc()) #공지사항 전부 가져오기    
+    notice_list = notice_list.paginate(page=page, per_page=10) #페이지적용
     return render_template('notice/list.html', notice_list=notice_list)
