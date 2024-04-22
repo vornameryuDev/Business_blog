@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="question-list-container">
+    <div class="row">
+        <!-- question navigation -->        
+        {% include '/snippets/question_list_nav.html' %}
+        <!-- question 수정 -->
+        <div class="col-10 question-list-table">
+            <h2>답변 수정</h2>
+            <form method="post">
+                {{form.csrf_token}}
+                {% include 'snippets/error_flash.html' %}                
+                <div>
+                    <label for="ansawer_content">{{ form.content.label }}</label>
+                    <textarea class="form-control" type="text" name="content" row="20">{{ form.content.data or '' }}</textarea>
+                </div>
+                <div class="question-create-btn mt-2">
+                    <button class="save btn btn-dark">저장</button>
+                </div>            
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block script %}
+<script>
+    const questionUpdateSaveBtn = document.querySelector('div.question-create-btn button.save');
+    questionUpdateSaveBtn.addEventListener('click', function() {
+        if (confirm('정말 수정하시겠습니까?')) {
+            location.href = this.dataset.uri;
+        }
+    })
+</script>
+{% endblock %}
