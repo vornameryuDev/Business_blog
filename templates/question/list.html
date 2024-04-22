@@ -26,6 +26,9 @@
                             <a href="{{ url_for('question.detail', question_id=question.id) }}">
                                 {{ question.subject }}
                             </a>
+                            <span style="color: rgb(172, 167, 167); font-size: 12px;">
+                                {{ question.answer_set|length }}
+                            </span>
                         </td>
                         <td class="col-2" style="text-align: center;">{{ question.user.username }}</td>
                         <td class="col-2" style="text-align: center;">anony</td>

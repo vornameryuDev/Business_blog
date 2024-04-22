@@ -21,11 +21,11 @@
                 <tbody>
                     {% for notice in notice_list.items %}
                     <tr class="row">
-                        <td class="col-1" style="text-align: center;">{{ loop.index }}</td>
+                        <td class="col-1" style="text-align: center;">{{ notice_list.total - ((notice_list.page-1) * notice_list.per_page) - loop.index0 }}</td>
                         <td class="col-5">
                             <a href="{{ url_for('notice.detail', notice_id=notice.id) }}">
                                 {{ notice.subject }}
-                            </a>
+                            </a>                            
                         </td>
                         <td class="col-2" style="text-align: center;">{{ notice.user.username }}</td>
                         <td class="col-2" style="text-align: center;">anony</td>
