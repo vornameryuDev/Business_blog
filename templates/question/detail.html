@@ -19,7 +19,10 @@
             </div>
             <div class="question-detail-btn-box">
                 <span class="list btn btn-dark" data-uri="{{ url_for('question.list') }}">목록</span>
-                {% if current_user.username == question.user.username %}
+                <span class="recommend btn btn-secondary" data-uri="{{ url_for('question.vote', question_id=question.id) }}">
+                    추천
+                </span>
+                {% if current_user.nickname == question.user.nickname %}
                 <span class="update btn btn-secondary" data-uri="{{ url_for('question.update', question_id=question.id) }}">
                     수정
                 </span>

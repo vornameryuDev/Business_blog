@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Blueprint, jsonify, redirect, render_template, request, url_for
+from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 
 from forms.answer_form import AnswerCreateForm
@@ -9,6 +9,18 @@ from app import db
 
 
 bp = Blueprint('question', __name__, url_prefix='/question')
+
+
+@bp.route('/vote/<int:question_id>')
+@login_required
+def vote(question_id):
+    question = Question.query.get_or_404(question_id)
+    if question.user.nickname == current_user.nickname:
+        flash('본인의 글은 추천하지 못합니다')
+    else:
+        question.voter.append(current_user) #추천정보 db 저장
+        db.session.commit()
+    return redirect(url_for('question.detail', question_id=question_id))
 
 
 @bp.route('/delete/<int:question_id>')
