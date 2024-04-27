@@ -11,6 +11,22 @@ from models.question_model import Question
 bp = Blueprint('answer', __name__, url_prefix='/answer')
 
 
+@bp.route('/vote/<int:answer_id>')
+@login_required
+def vote(answer_id):
+    answer = Answer.query.get_or_404(answer_id)
+    if answer.user.nickname == current_user.nickname:
+        flash("본인의 답변은 추천할 수 없습니다")
+    else:
+        try:
+            answer.voter.append(current_user)            
+            db.session.commit()
+        except Exception as e:
+            print(f"error: {e}")
+            db.session.rollback() #commit을 해줬었기 때문에 rollback해줘야 함
+    return redirect(url_for('question.detail', question_id=answer.question_id))
+
+
 @bp.route('/delete/<int:answer_id>')
 def delete(answer_id):    
     answer = Answer.query.get_or_404(answer_id)

@@ -13,7 +13,7 @@
             </div>
             <div class="answer-list-box">
                 <a href=""><i class="fa-solid fa-comment"></i> 댓글 </a>
-                <a href=""> | <i class="fa-solid fa-thumbs-up"></i>추천</a>
+                <a class="recommend" href="javascript:void(0)" data-uri="{{ url_for('answer.vote', answer_id=answer.id) }}"> | <i class="fa-solid fa-thumbs-up"></i>추천 <span> {{ answer.voter|length }}</span></a>
                 {% if current_user.nickname == answer.user.nickname %}
                 <a href="{{ url_for('answer.update', answer_id=answer.id) }}">| <i class="fa-solid fa-pen"></i> 수정</a>
                 <a class="delete" href="#" data-uri="{{ url_for('answer.delete', answer_id=answer.id) }}">| <i class="fa-solid fa-trash"></i> 삭제 </a>
@@ -25,11 +25,18 @@
 {% endfor %}
 {% block script %}
 <script>
-    const answerDeleteBtn = document.querySelector('div.answer-list-box a.delete');
-    answerDeleteBtn.addEventListener('click', function() {
+    const answerRecommendBtns = document.querySelectorAll('div.answer-list-box a.recommend');
+    const answerDeleteBtns = document.querySelectorAll('div.answer-list-box a.delete');
+
+    Array.from(answerRecommendBtns).forEach(element => element.addEventListener('click', function() {
+        if (confirm('추천하시겠습니까?')) {
+            location.href = this.dataset.uri;
+        }
+    }))
+    answerDeleteBtns.forEach(element => element.addEventListener('click', function() {
         if (confirm('정말 삭제하시겠습니까?')) {
             location.href = this.dataset.uri;
         }
-    })
+    }))    
 </script>
 {% endblock %}
