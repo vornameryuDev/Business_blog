@@ -46,6 +46,10 @@ header {
     background-color: rgb(230, 222, 222);
     padding: 20px 0 20px 0;
 }
+/* .question-list-container .question-title {
+    display: flex;
+    justify-content: space-between;
+} */
 .question-list-container>div {
     margin:0 auto;
     width: 1200px;
@@ -74,9 +78,20 @@ header {
     padding: 20px 40px 20px 40px;
     background-color: white;
 }
-.question-list-table h2 {
+.question-list-table div.question-list-table-titlebox{
+    display: flex;
+    justify-content: space-between;
+    align-items:start;
+}
+.question-list-table .question-list-table-titlebox h2 {
     font-weight: 700;
     margin-bottom: 30px;
+}
+.question-list-table .question-list-table-titlebox input {
+    border: solid 1px var(--app-color);
+    border-radius: 5px;
+    height: inherit;
+    
 }
 .signin-container h2 {
     font-weight: 700;

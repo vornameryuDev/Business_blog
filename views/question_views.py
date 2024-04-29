@@ -79,5 +79,7 @@ def create():
 
 @bp.route('/list')
 def list():
-    question_list = Question.query.all()
+    page = request.args.get('page', type=int, default=1)
+    question_list = Question.query.order_by(Question.created_at.desc())    
+    question_list = question_list.paginate(page=page, per_page=10)
     return render_template('question/list.html', question_list=question_list)
