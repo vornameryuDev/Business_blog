@@ -1,4 +1,4 @@
-const backQuestionListBtn = document.querySelector('.question-detail-btn-box .list');
+const backQuestionListBtn = document.querySelector('.question-list-container div>span.list');
 const updateQuestionBtn = document.querySelector('.question-detail-btn-box .update');
 const deleteQuestionBtn = document.querySelector('.question-detail-btn-box .delete');
 const recommendQuestionBtn = document.querySelector('.question-detail-btn-box .recommend');
@@ -21,8 +21,7 @@ function recommendQuestion() {
     }
 }
 
-
-backQuestionListBtn.addEventListener('click', backToQuestionList);
 recommendQuestionBtn.addEventListener('click', recommendQuestion);
+backQuestionListBtn.addEventListener('click', backToQuestionList);
 updateQuestionBtn.addEventListener('click', updateQuestion);
 deleteQuestionBtn.addEventListener('click', deleteQuestion);

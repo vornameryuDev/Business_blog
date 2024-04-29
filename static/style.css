@@ -117,15 +117,18 @@ header {
     margin-bottom: 10px;
 }
 .question-detail-btn-box {
-    display: flex;
-    justify-content: end;
+    /* display: flex;
+    justify-content: end; */
     margin-top: 20px;
+    border-bottom: solid 1px var(--app-color);
+    padding-bottom: 20px;
+    color: rgb(100, 98, 98);
+    font-size: 12px;
 }
 .question-detail-btn-box span{
     margin-left: 10px;
 }
-.question-list-table h3{
-    border-top: 1px solid var(--app-color);
+.question-list-table h3{    
     margin-top: 30px;
     padding-top: 20px;
     font-weight: 700;
