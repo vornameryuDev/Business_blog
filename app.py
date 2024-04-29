@@ -5,6 +5,7 @@ from flask_cors import CORS
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+# from flaskext.markdown import Markdown
 import sqlalchemy
 
 import config
@@ -20,6 +21,9 @@ def create_app():
     app = Flask(__name__)
     CORS(app) #보안등록
 
+    #---------- markdown
+    # Markdown(app, extensions=['nl2br', 'fenced_code']) #줄바꿈변환, 코드표시기능
+
     #--------- CSRF
     app.secret_key = config.secret_key
 
@@ -29,13 +33,15 @@ def create_app():
     #---------- db, mirate init
     db.init_app(app)
     migrate.init_app(app, db)
+    from models.comment_model import Comment
     from models.answer_model import Answer
     from models.question_model import Question
     from models.notice_model import Notice
     from models.user_model import User
 
     #---------- blueprint
-    from views import user_views, notice_views, question_views, answer_views
+    from views import user_views, notice_views, question_views, answer_views, comment_views
+    app.register_blueprint(comment_views.bp)
     app.register_blueprint(answer_views.bp)
     app.register_blueprint(question_views.bp)
     app.register_blueprint(notice_views.bp)

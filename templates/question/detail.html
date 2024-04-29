@@ -19,19 +19,30 @@
             </div>
 
             <div class="question-detail-btn-box">
+                <a class="comment" href="javascript:void(0)" data-uri="">
+                    <i class="fa-solid fa-comment"></i> 댓글 
+                </a>    
                 <a class="recommend" href="javascript:void(0)" data-uri="{{ url_for('question.vote', question_id=question.id) }}">
-                    <i class="fa-solid fa-thumbs-up"></i> 추천 {{ question.voter|length }}
+                    | <i class="fa-solid fa-thumbs-up"></i> 추천 {{ question.voter|length }}
                 </a>                
                 {% if current_user.nickname == question.user.nickname %}
                 <a class="update" href="javascript:void(0)" data-uri="{{ url_for('question.update', question_id=question.id) }}">
-                    <i class="fa-solid fa-pen"></i>| 수정
+                    | <i class="fa-solid fa-pen"></i> 수정
                 </a>
                 <a class="delete" href="javascript:void(0)" data-uri="{{ url_for('question.delete', question_id=question.id) }}">
-                    <i class="fa-solid fa-trash"></i>| 삭제</span>
+                    | <i class="fa-solid fa-trash"></i> 삭제</span>
                 </a>
                 {% endif %}
             </div>
-            <div class="d-flex justify-content-end mt-2">
+
+            <div class="comment-box hidden">
+                <textarea class="form-control" name="comment-content" id="question-comment" rows="1"></textarea>
+                <div class="d-flex justify-content-end mt-2">
+                    <button>댓글저장</button>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-4">
                 <span class="list btn btn-dark" data-uri="{{ url_for('question.list') }}">목록</span>
             </div>
 
@@ -50,5 +61,9 @@
         </div>
     </div>
 </div>
+
+<form id="q-comm-form" action="{{ url_for('comment.create', question_id=question.id) }}" method="post">
+    <input type="hidden" type="text" id="q-com-input" name="comment">
+</form>
 
 {% endblock %}
