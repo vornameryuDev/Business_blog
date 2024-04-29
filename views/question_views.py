@@ -4,8 +4,10 @@ from flask_login import current_user, login_required
 
 from forms.answer_form import AnswerCreateForm
 from forms.question_form import QuestionCreateForm, QuestionUpdateForm
+from models.answer_model import Answer
 from models.question_model import Question
 from app import db
+from models.user_model import User
 
 
 bp = Blueprint('question', __name__, url_prefix='/question')
@@ -80,6 +82,17 @@ def create():
 @bp.route('/list')
 def list():
     page = request.args.get('page', type=int, default=1)
-    question_list = Question.query.order_by(Question.created_at.desc())    
+    kw = request.args.get('kw', type=str, default="")
+    question_list = Question.query.order_by(Question.created_at.desc()) #question 전체
+    if kw:
+        search = f"%%{kw}%%" #검색어 정의
+        subquery = db.session.query(Answer.id, Answer.question_id, Answer.content, User.id, User.username).join(User, Answer.id==User.id).subquery() #user인 사람들이 작성한 답변들
+        question_list = question_list.join(User).outerjoin(subquery, Question.id == subquery.c.question_id).filter(
+            Question.content.ilike(search) | #질문내용
+            Question.subject.ilike(search) | #질문제목
+            User.username | #질문작성자
+            subquery.c.content.ilike(search) | #답변내용
+            subquery.c.username.ilike(search) #답변작성자
+        ).distinct()
     question_list = question_list.paginate(page=page, per_page=10)
-    return render_template('question/list.html', question_list=question_list)
+    return render_template('question/list.html', question_list=question_list, page=page, kw=kw)

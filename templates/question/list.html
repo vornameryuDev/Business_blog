@@ -9,10 +9,13 @@
         <div class="col-10 question-list-table">
             <div class="question-list-table-titlebox">
                 <h2>질의응답</h2>
+
+                <!-- 검색버튼 클릭 ->  -->
                 <div>
                     <input type="text" style="height: inherit;" id="search_kw" value="{{ kw or '' }}">
-                    <button class="btn btn-dark">검색</button>
+                    <button class="btn btn-dark" id="btn-search">검색</button>
                 </div>
+
             </div>
             <table class="table">
                 <thead>
@@ -62,4 +65,21 @@
     <input type="hidden" id="page" name="page" value="{{ page }}">
 </form>
 
+{% endblock %}
+{% block script %}
+<script>
+    const pageElements = document.getElementsByClassName("page-link");    
+    Array.from(pageElements).forEach(element => {
+        element.addEventListener('click', function() {
+            document.getElementById('page').value = this.dataset.page;
+            document.getElementById('search-form').submit();
+        })
+    })
+    const btn_search = document.getElementById('btn-search');
+    btn_search.addEventListener('click', function() {
+        document.getElementById('kw').value = document.getElementById('search_kw').value; //검색값 input hidden에 할당
+        document.getElementById('page').value = 1 // page=1부터 검색
+        document.getElementById('search-form').submit();  // get 전송
+    })
+</script>
 {% endblock %}
