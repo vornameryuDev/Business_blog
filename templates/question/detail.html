@@ -21,13 +21,14 @@
             <div class="question-detail-btn-box">
                 <a class="recommend" href="javascript:void(0)" data-uri="{{ url_for('question.vote', question_id=question.id) }}">
                     <i class="fa-solid fa-thumbs-up"></i> 추천 {{ question.voter|length }}
-                </a>
-                
+                </a>                
                 {% if current_user.nickname == question.user.nickname %}
-                <span class="update" data-uri="{{ url_for('question.update', question_id=question.id) }}">
+                <a class="update" href="javascript:void(0)" data-uri="{{ url_for('question.update', question_id=question.id) }}">
                     <i class="fa-solid fa-pen"></i>| 수정
-                </span>
-                <span class="delete" data-uri="{{ url_for('question.delete', question_id=question.id) }}"><i class="fa-solid fa-trash"></i>| 삭제</span>
+                </a>
+                <a class="delete" href="javascript:void(0)" data-uri="{{ url_for('question.delete', question_id=question.id) }}">
+                    <i class="fa-solid fa-trash"></i>| 삭제</span>
+                </a>
                 {% endif %}
             </div>
             <div class="d-flex justify-content-end mt-2">
