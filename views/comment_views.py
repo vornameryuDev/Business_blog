@@ -1,7 +1,7 @@
 import datetime
 from flask_login import current_user, login_required
 from models.comment_model import Comment
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, redirect, request, url_for
 
 from models.question_model import Question
 from app import db
@@ -24,4 +24,4 @@ def create(question_id):
         )
         db.session.add(comment)
         db.session.commit()
-    return jsonify(success=True)
+    return redirect(url_for('question.detail', question_id=question_id))

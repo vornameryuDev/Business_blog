@@ -19,10 +19,10 @@
             </div>
 
             <div class="question-detail-btn-box">
-                <a class="comment" href="javascript:void(0)" data-uri="">
-                    <i class="fa-solid fa-comment"></i> 댓글 
+                <a class="comment" href="javascript:void(0)" data-uri="" style="color: rgb(141, 138, 138);">
+                    <i class="fa-solid fa-comment" ></i> 댓글 
                 </a>    
-                <a class="recommend" href="javascript:void(0)" data-uri="{{ url_for('question.vote', question_id=question.id) }}">
+                <a class="recommend" href="javascript:void(0)" data-uri="{{ url_for('question.vote', question_id=question.id) }}" style="color: rgb(141, 138, 138);">
                     | <i class="fa-solid fa-thumbs-up"></i> 추천 {{ question.voter|length }}
                 </a>                
                 {% if current_user.nickname == question.user.nickname %}
@@ -35,12 +35,40 @@
                 {% endif %}
             </div>
 
+            <!-- 댓글입력 -->
             <div class="comment-box hidden">
                 <textarea class="form-control" name="comment-content" id="question-comment" rows="1"></textarea>
                 <div class="d-flex justify-content-end mt-2">
                     <button>댓글저장</button>
                 </div>
             </div>
+
+
+            <!-- 댓글확인 -->
+            <div style="display: flex; border-bottom: solid 1px var(--app-color); padding: 10px; font-size: 12px;">
+                <span>이상하네염</span>
+                <span>- 유민수님</span>&nbsp;
+                <span><i class="fa-solid fa-clock"></i>2024.04.30</span>
+                <div style="margin-left: 10px;">
+                    <a href="">대댓글</a>
+                    <a href="">추천</a>
+                    <a href="">수정</a>
+                    <a href="">삭제</a>
+                </div>
+            </div>
+            <div style="display: flex; border-bottom: solid 1px var(--app-color); padding: 10px; font-size: 12px;">
+                <span>이상하네염</span>
+                <span>- 유민수님</span>&nbsp;
+                <span><i class="fa-solid fa-clock"></i>2024.04.30</span>
+                <div style="margin-left: 10px;">
+                    <a href="">대댓글</a>
+                    <a href="">추천</a>
+                    <a href="">수정</a>
+                    <a href="">삭제</a>
+                </div>
+            </div>
+
+
 
             <div class="d-flex justify-content-end mt-4">
                 <span class="list btn btn-dark" data-uri="{{ url_for('question.list') }}">목록</span>
