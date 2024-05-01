@@ -162,7 +162,25 @@ div.answer-list-box a{
 .comment-box {
     margin-top:20px;
 }
+.comment-box-update {
+    margin-top:20px;
+}
 .comment-box button {
+    background-color: var(--app-color);
+    border-radius: 5px;    
+    font-size: 10px;
+    color: black;
+    padding: 5px;
+    border: solid 1px var(--app-color);
+    font-weight: 700;
+}
+.comment-row {
+    display: flex;
+    border-bottom: solid 1px var(--app-color);
+    padding: 10px;
+    font-size: 12px;
+}
+.comment-box-update button {
     background-color: var(--app-color);
     border-radius: 5px;    
     font-size: 10px;

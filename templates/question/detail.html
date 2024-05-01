@@ -5,6 +5,7 @@
     <div class="row">
         <!-- question navigation -->        
         {% include '/snippets/question_list_nav.html' %}
+
         <!-- question 등록 -->
         <div class="col-10 question-list-table">
             <div class="question-detail-subject">
@@ -33,9 +34,12 @@
                     | <i class="fa-solid fa-trash"></i> 삭제</span>
                 </a>
                 {% endif %}
-            </div>
-
-            <!-- 댓글입력 -->
+            </div>            
+            
+            <!-- 댓글확인 -->
+            {% include '/comment/list.html' %}
+            
+            <!-- 댓글생성 -->
             <div class="comment-box hidden">
                 <textarea class="form-control" name="comment-content" id="question-comment" rows="1"></textarea>
                 <div class="d-flex justify-content-end mt-2">
@@ -43,31 +47,13 @@
                 </div>
             </div>
 
-
-            <!-- 댓글확인 -->
-            <div style="display: flex; border-bottom: solid 1px var(--app-color); padding: 10px; font-size: 12px;">
-                <span>이상하네염</span>
-                <span>- 유민수님</span>&nbsp;
-                <span><i class="fa-solid fa-clock"></i>2024.04.30</span>
-                <div style="margin-left: 10px;">
-                    <a href="">대댓글</a>
-                    <a href="">추천</a>
-                    <a href="">수정</a>
-                    <a href="">삭제</a>
+            <!-- 댓글수정 -->
+            <div class="comment-box-update hidden">
+                <textarea class="form-control" name="comment-content-update" id="question-comment-update" rows="1"></textarea>
+                <div class="d-flex justify-content-end mt-2">
+                    <button class="update">댓글수정</button>
                 </div>
             </div>
-            <div style="display: flex; border-bottom: solid 1px var(--app-color); padding: 10px; font-size: 12px;">
-                <span>이상하네염</span>
-                <span>- 유민수님</span>&nbsp;
-                <span><i class="fa-solid fa-clock"></i>2024.04.30</span>
-                <div style="margin-left: 10px;">
-                    <a href="">대댓글</a>
-                    <a href="">추천</a>
-                    <a href="">수정</a>
-                    <a href="">삭제</a>
-                </div>
-            </div>
-
 
 
             <div class="d-flex justify-content-end mt-4">
@@ -93,5 +79,6 @@
 <form id="q-comm-form" action="{{ url_for('comment.create', question_id=question.id) }}" method="post">
     <input type="hidden" type="text" id="q-com-input" name="comment">
 </form>
+
 
 {% endblock %}

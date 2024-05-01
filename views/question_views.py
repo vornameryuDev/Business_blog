@@ -59,7 +59,8 @@ def detail(question_id):
     form = AnswerCreateForm()
     question = Question.query.get_or_404(question_id)
     answer_list = question.answer_set
-    return render_template('question/detail.html', question=question, form=form, answer_list=answer_list)
+    comment_list = question.comment_set
+    return render_template('question/detail.html', question=question, form=form, answer_list=answer_list, comment_list=comment_list)
 
 
 @bp.route('/create', methods=["GET", "POST"])

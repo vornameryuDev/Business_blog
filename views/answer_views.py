@@ -24,7 +24,7 @@ def vote(answer_id):
         except Exception as e:
             print(f"error: {e}")
             db.session.rollback() #commit을 해줬었기 때문에 rollback해줘야 함
-    return redirect(url_for('question.detail', question_id=answer.question_id))
+    return redirect(f"{url_for('question.detail', question_id=answer.question_id)}#answer_{answer.id}")
 
 
 @bp.route('/delete/<int:answer_id>')
@@ -46,7 +46,7 @@ def update(answer_id):
     if request.method == 'POST' and form.validate_on_submit():
         form.populate_obj(answer)
         db.session.commit() #db저장
-        return redirect(url_for('question.detail', question_id=answer.question.id))
+        return redirect(f"{url_for('question.detail', question_id=answer.question.id)}#answer_{answer.id}")
     #get
     if current_user.nickname != answer.user.nickname: #권한있는 사람만 url로 접근가능
         return jsonify(grant=False)
@@ -66,7 +66,7 @@ def create(question_id):
         ) #answer정의
         question.answer_set.append(answer) #답변저장
         db.session.commit() #커밋
-        return redirect(url_for('question.detail', question_id=question_id))
+        return redirect(f"{url_for('question.detail', question_id=question_id)}#answer_{answer.id}")
     #get접근
     return jsonify(grant=False)
     
