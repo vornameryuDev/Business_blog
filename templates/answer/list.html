@@ -1,9 +1,9 @@
 {% for answer in answer_list %}
 <a id="answer_{{ answer.id }}"></a>
 <div style="margin-top:30px;">
-    <div class="card">
+    <div class="card" id="answer-card">
         <div class="card-body">
-            <div>{{ answer.content }}</div>
+            <div class="answer-content">{{ answer.content }}</div>
             <div class="d-flex justify-content-end">
                 <div class="badge text-dark bg-light text-start">
                     <div>
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="answer-list-box">
-                <a href=""><i class="fa-solid fa-comment"></i> 댓글 </a>
+                <a href="#"><i class="fa-solid fa-comment"></i> 댓글 </a>
                 <a class="recommend" href="javascript:void(0)" data-uri="{{ url_for('answer.vote', answer_id=answer.id) }}"> | <i class="fa-solid fa-thumbs-up"></i> 추천 <span> {{ answer.voter|length }}</span></a>
                 {% if current_user.nickname == answer.user.nickname %}
                 <a href="{{ url_for('answer.update', answer_id=answer.id) }}">| <i class="fa-solid fa-pen"></i> 수정</a>
@@ -21,6 +21,23 @@
                 {% endif %}
             </div>
         </div>
+
+        {% for comment in answer.comment_set %}
+        <div style="font-size: 14px; margin:0px 20px 2px 20px;background-color: rgb(226, 223, 223);">
+            {{ comment.content }}
+        </div>
+        {% endfor %}
+
+        <!-- 댓글 -->
+        <div class="m-2 hidden a-comment-box">            
+            <textarea class="form-control" name="comment-content-update" id="" rows="1"></textarea>
+            <div class="d-flex justify-content-end mt-2">
+                <button class="a-save">댓글저장</button>
+            </div>
+        </div>
+        <form action="{{ url_for('answer.comment', answer_id=answer.id) }}" class="a-form" method="post">
+            <input type="hidden" name="answer-comment" class="a-input">
+        </form>
     </div>
 </div>
 {% endfor %}
@@ -28,6 +45,38 @@
 <script>
     const answerRecommendBtns = document.querySelectorAll('div.answer-list-box a.recommend');
     const answerDeleteBtns = document.querySelectorAll('div.answer-list-box a.delete');
+    const rows = document.querySelectorAll('div#answer-card');
+
+    a_hidden_status = true;
+
+    rows.forEach((element) => {
+        const commentIcon = element.querySelector('a:first-child'); //댓글버튼
+        const aCommentBox = element.querySelector('div.a-comment-box'); //댓글다는 박스
+        const answerValue = element.querySelector('div.answer-content');
+        const aTextArea = aCommentBox.querySelector('textarea.form-control');
+
+        commentIcon.addEventListener('click', function() {            
+            // 댓글다는창 보이게, 안보이게 하기
+            if (a_hidden_status) {
+                aCommentBox.classList.remove('hidden');                
+            } else {
+                aCommentBox.classList.add('hidden');
+            }
+            a_hidden_status = !a_hidden_status;
+
+            // 댓글저장
+            const aCommentSaveBtn = aCommentBox.querySelector('button.a-save');
+            const aForm = element.querySelector('form.a-form');
+            const aInput = element.querySelector('input.a-input');
+            
+            aCommentSaveBtn.addEventListener('click', function() {
+                aInput.value = aTextArea.value;
+                aForm.submit();
+                aInput.value = '';
+            })
+        })
+    })
+
 
     Array.from(answerRecommendBtns).forEach(element => element.addEventListener('click', function() {
         if (confirm('추천하시겠습니까?')) {

@@ -198,3 +198,12 @@ div.answer-list-box a{
     border: solid 1px var(--app-color);
     font-weight: 700;
 }
+.a-comment-box button {
+    background-color: var(--app-color);
+    border-radius: 5px;    
+    font-size: 10px;
+    color: black;
+    padding: 5px;
+    border: solid 1px var(--app-color);
+    font-weight: 700;
+}

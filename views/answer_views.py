@@ -1,15 +1,35 @@
+
 from datetime import datetime
 from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
+from sqlalchemy import true
 
 from app import db
 from forms.answer_form import AnswerCreateForm, AnswerUpdateForm
 from models.answer_model import Answer
 from models.question_model import Question
+from models.comment_model import Comment
 
 
 bp = Blueprint('answer', __name__, url_prefix='/answer')
 
+
+@bp.route('/comment/<int:answer_id>', methods=["POST"])
+@login_required
+def comment(answer_id):
+    answer = Answer.query.get_or_404(answer_id)
+    if request.method == 'POST':
+        newComment = request.form['answer-comment']
+        print(newComment)
+        answer_comment = Comment(
+            user = current_user,
+            answer = answer,
+            content = newComment,
+            created_at = datetime.now()
+        )
+        db.session.add(answer_comment)
+        db.session.commit()
+        return redirect(url_for('question.detail', question_id=answer.question_id))
 
 @bp.route('/vote/<int:answer_id>')
 @login_required
