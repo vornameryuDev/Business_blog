@@ -1,5 +1,4 @@
 import datetime
-from sre_constants import SUCCESS
 from flask_login import current_user, login_required
 from models.comment_model import Comment
 from flask import Blueprint, flash, jsonify, redirect, request, url_for
