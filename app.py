@@ -25,10 +25,11 @@ def create_app():
     # Markdown(app, extensions=['nl2br', 'fenced_code']) #줄바꿈변환, 코드표시기능
 
     #--------- CSRF
-    app.secret_key = config.secret_key
+    # app.secret_key = config.secret_key
 
     #---------- config    
-    app.config.from_object(config)
+    # app.config.from_object(config)
+    app.config.from_envvar('APP_CONFIG_FILE')
 
     #---------- db, mirate init
     db.init_app(app)
