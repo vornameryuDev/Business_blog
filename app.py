@@ -1,6 +1,6 @@
 import os
 from urllib.parse import urlencode
-from flask import Flask, config, redirect, request, url_for
+from flask import Flask, config, redirect, request, url_for, render_template
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -17,9 +17,16 @@ db = SQLAlchemy()
 migrate = Migrate()
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #https만 지원하는 기능 사용하기 위해
 
+#에러났을때 호출되는 함수: 404나타내기
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 def create_app():
     app = Flask(__name__)
     CORS(app) #보안등록
+
+    #---------- 오류페이지
+    app.register_error_handler(404, page_not_found)
 
     #---------- markdown
     # Markdown(app, extensions=['nl2br', 'fenced_code']) #줄바꿈변환, 코드표시기능
