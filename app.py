@@ -48,12 +48,13 @@ def create_app():
     from models.user_model import User
 
     #---------- blueprint
-    from views import user_views, notice_views, question_views, answer_views, comment_views
+    from views import user_views, notice_views, question_views, answer_views, comment_views, main_views
     app.register_blueprint(comment_views.bp)
     app.register_blueprint(answer_views.bp)
     app.register_blueprint(question_views.bp)
     app.register_blueprint(notice_views.bp)
     app.register_blueprint(user_views.bp)
+    app.register_blueprint(main_views.bp)
 
     #---------- login support
     login_manager = LoginManager()
