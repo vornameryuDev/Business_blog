@@ -15,6 +15,11 @@
 - Flask-Migrate 4.0.7
 - Flask-Login 0.6.3
 ```
+
+## Server
+ip: AWS LightSail
+web: NginX
+WSGI: Gunicorn
   
 
 ## 화면구성
@@ -54,6 +59,10 @@
   - route: redirect, url_for, request(GET, POST)
   - db: MySQL(local), SQLAlchemy
   - security: CORS
+
+3. logging
+  - info수준으로 파일저장
+  - RotatingFileHandler사용
 ```
 
 
